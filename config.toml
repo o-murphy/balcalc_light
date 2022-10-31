@@ -1,0 +1,11 @@
+title = "ARCHER BC LITE TOML CONFIG"
+
+
+[owner]
+name = "THERMAL VISION TECHNOLOGIES"
+
+[base_cfg]
+icon = "Icon.ico"
+theme = "C:/Users/Sergey/PycharmProjects/archerbc_lite/themes/default_dark.qss"
+
+
