@@ -6,6 +6,6 @@ name = "THERMAL VISION TECHNOLOGIES"
 
 [base_cfg]
 icon = "Icon.ico"
-theme = "C:/Users/Sergey/PycharmProjects/archerbc_lite/themes/default_dark.qss"
+theme = "themes/default.qss"
 
 
