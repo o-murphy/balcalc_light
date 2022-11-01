@@ -1,0 +1,133 @@
+QLineEdit {
+    height: 32px;
+	border: 0px;
+	border-radius: 8px;
+	background-color: rgb(40, 40, 40);
+	font-size: 14px;
+	padding: 0px 8px 0px 8px;
+	margin: 0px 10px 0px 10px;
+}
+
+
+/* QTabBar:tab */
+
+
+QTabBar::tab:bottom {
+	height: 40px;
+	background-color:rgb(28, 28, 28);
+	color: rgb(95, 95, 95);
+	border-bottom: 2px solid rgb(28, 28, 28);
+}
+
+QTabBar::tab:bottom:selected {
+	color: rgb(255, 170, 0);
+
+    border-bottom: 2px solid rgb(255, 170, 0);
+}
+
+QTabBar::tab:bottom:hover:!selected {
+    color: rgb(255, 255, 255);
+}
+
+
+/* QTableView */
+
+
+QTableWidget, QTableView, QListWidget {
+	outline: 0;
+}
+
+QTableWidget::item:selected, QTableView::item:selected, QListWidget::item:selected {
+	background-color: rgb(55, 52, 63);
+}
+
+QTableWidget::item:hover, QTableView::item:hover, QListWidget::item:hover {
+	background-color: rgb(78, 78, 78);
+}
+
+QTableWidget::item, QTableView::item, QListWidget::item{
+    /* background-color: rgb(40, 40, 40); */
+}
+
+
+/* QScrollBar:vertical */
+
+QScrollBar:vertical {
+    background-color: rgb(51, 51, 51); /*#2A2929;*/
+    width: 14px;
+    margin: 15px 6px 15px 6px;
+    border: 1px transparent #2A2929;
+    border-radius: 6px;
+}
+
+QScrollBar:vertical:hover {
+    background-color: rgb(51, 51, 51);
+    width: 14px;
+    margin: 15px 3px 15px 3px;
+    border: 1px transparent #2A2929;
+    border-radius: 6px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: rgb(78, 78, 78);
+    min-height: 5px;
+    border-radius: 4px;
+}
+
+QScrollBar::sub-line:vertical
+{
+    margin: 4px 0px 0px 0px;
+    border: 1px solid rgb(51, 51, 51);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    height: 5px;
+    width: 8px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical
+{
+    margin: 0px 0px 4px 0px;
+    border: 1px solid rgb(51, 51, 51);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background-color: rgb(51, 51, 51);
+    color: white;
+    height: 5px;
+    width: 8px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::sub-line:vertical:hover,QScrollBar::sub-line:vertical:on {
+    margin: 4px 0px 0px 0px;
+    border: 1px solid rgb(51, 51, 51);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: rgb(78, 78, 78);
+    height: 5px;
+    width: 8px;
+    subcontrol-position: top;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::add-line:vertical:hover, QScrollBar::add-line:vertical:on {
+    margin: 0px 0px 4px 0px;
+    border-bottom: 1px solid rgb(78, 78, 78);
+    background-color: rgb(78, 78, 78);
+    height: 5px;
+    width: 8px;
+    subcontrol-position: bottom;
+    subcontrol-origin: margin;
+}
+
+QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
+    background: none;
+}
+
+QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
+    background: none;
+}

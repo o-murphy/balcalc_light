@@ -17,30 +17,23 @@ def load_qss(file_name):
 
 
 def main():
-    with open('config.toml', 'rb') as fp:
-        cfg = tomllib.load(fp)
-    base_cfg = cfg['base_cfg']
     try:
+        with open('config.toml', 'rb') as fp:
+            config = tomllib.load(fp)
+        base_cfg = config['base_cfg']
+        icon = base_cfg['icon']
         with open(base_cfg['theme'], 'r') as fp:
             qss = fp.read()
     except IOError:
-        qss = ""
+        icon = None
+        qss = None
 
-    # os.chdir(os.path.dirname(__file__))
     App = QApplication(sys.argv)
 
-    # _id = QtGui.QFontDatabase.addApplicationFont("Bank Gothic Light BT.ttf")
-    # fid = QtGui.QFontDatabase.applicationFontFamilies(_id)
-    # font = QtGui.QFont("BankGothic Lt BT")
-    # font = QtGui.QFont("Segoe UI Historic")
-    # app.setFont(font)
-
     # NATIVE DARK THEME
-    from gui.dark_theme import DarkTheme
     DarkTheme().setup(App)
 
-    print(base_cfg['theme'])
-    App.setWindowIcon(QIcon(base_cfg['icon']))
+    App.setWindowIcon(QIcon(icon))
     App.setStyleSheet(qss)
 
     window = MainWindow(App)

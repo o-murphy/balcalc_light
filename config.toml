@@ -5,7 +5,22 @@ title = "ARCHER BC LITE TOML CONFIG"
 name = "THERMAL VISION TECHNOLOGIES"
 
 [base_cfg]
-icon = "Icon.ico"
+icon = "resources/Icon.ico"
 theme = "themes/default.qss"
+
+[units]
+twistunits = 10
+vunits = 60
+punits = 40
+shunits = 15
+tempunits = 51
+dropunits = 16
+eunits = 30
+distunits = 17
+angleunits = 1
+lnunits = 10
+dunits = 10
+wunits = 70
+pathunits = 3
 
 
