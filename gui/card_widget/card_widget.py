@@ -1,8 +1,8 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QVBoxLayout, QFrame
+from PyQt5.QtWidgets import QVBoxLayout, QFrame, QGroupBox
 
 
-class CardWidget(QFrame):
+class CardWidget(QGroupBox):
     def __init__(self, parent=None):
         super(CardWidget, self).__init__(parent)
         self.Layout = QVBoxLayout(self)

@@ -5,6 +5,7 @@ from ..abstract_widget import Ui_AbstractWidget
 from ..card_widget import CardWidget
 from ..abstract_centered_label import CenteredHeaderLabel
 
+
 TEMP_RIFLE = {
     'Rifle': "UAR-10",
     'Caliber': '.308 Win',
