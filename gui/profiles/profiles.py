@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QListWidgetItem, QListWidget, 
 from ..abstract_widget import Ui_AbstractWidget
 from ..profile_item import ProfileItemWidget
 from ..search_bar import SearchBar
-from ..abstract_scrollable_list import AbstractScroller
+from ..abstract_scrollable_list import AbstractScroller, QScroller
 
 
 class ProfilesWidget(QWidget, Ui_AbstractWidget):
@@ -18,8 +18,7 @@ class ProfilesWidget(QWidget, Ui_AbstractWidget):
         self.plist = QListWidget(self)
         self.plist.setVerticalScrollMode(QAbstractItemView.ScrollPerPixel)
         self.scroller = AbstractScroller(self.plist.viewport())
-        # self.scroller.setTouchScrollable(True)
-        self.scroller.setMouseScrollable(True)
+        self.scroller.setScrollable(True, QScroller.LeftMouseButtonGesture)
 
         self.Layout.addWidget(self.search_bar)
         self.Layout.addWidget(self.plist)

@@ -1,9 +1,10 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QLabel, QSizePolicy
-from ..abstract_widget import Ui_AbstractWidget
-from ..card_widget import CardWidget
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea, QSizePolicy
+
 from ..abstract_centered_label import CenteredHeaderLabel
+from ..card_widget import CardWidget
+from ..abstract_scrollable_list import AbstractScroller, QScroller
 
 
 TEMP_RIFLE = {
@@ -30,23 +31,36 @@ TEMP_BULLET = {
 }
 
 
-class ProfileProps(QWidget, Ui_AbstractWidget):
+class ProfileProps(QScrollArea):
     def __init__(self, parent=None):
         super(ProfileProps, self).__init__(parent)
-        self.setupUi(self)
+        # self.setupUi(self)
+        self.setWidgetResizable(True)
+
+        self.scroller = AbstractScroller(self.viewport())
+        self.scroller.setScrollable(True, QScroller.LeftMouseButtonGesture)
+        # self.scroller.setTouchScrollable(True)
 
         self.Layout = QVBoxLayout(self)
-        self.Layout.setContentsMargins(0, 0, 0, 0)
-        self.Layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
-        self.Layout.setSpacing(0)
 
-        self.rifle_card = CardWidget(self)
-        self.cartridge_card = CardWidget(self)
-        self.bullet_card = CardWidget(self)
+        self.mw = QWidget(self)
 
-        self.Layout.addWidget(self.rifle_card, 0)
-        self.Layout.addWidget(self.cartridge_card, 1)
-        self.Layout.addWidget(self.bullet_card, 2)
+        self.mw.Layout = QVBoxLayout(self.mw)
+        self.mw.Layout.setContentsMargins(0, 0, 0, 0)
+        self.mw.Layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        self.mw.Layout.setSpacing(0)
+        self.mw.resize(200, 1000)
+
+        self.setWidget(self.mw)
+
+
+        self.rifle_card = CardWidget(self.mw)
+        self.cartridge_card = CardWidget(self.mw)
+        self.bullet_card = CardWidget(self.mw)
+
+        self.mw.Layout.addWidget(self.rifle_card, 0)
+        self.mw.Layout.addWidget(self.cartridge_card, 1)
+        self.mw.Layout.addWidget(self.bullet_card, 2)
 
         self.rifle_label = CenteredHeaderLabel('Rifle', self.rifle_card)
         self.cartridge_label = CenteredHeaderLabel('Cartridge', self.cartridge_card)
@@ -68,7 +82,6 @@ class ProfileProps(QWidget, Ui_AbstractWidget):
         self.fill_table(self.bullet_table, TEMP_BULLET)
 
     def fill_table(self, table, data):
-
         model = QStandardItemModel(self)
         labels = []
         for k, v in data.items():
@@ -83,9 +96,5 @@ class ProfileProps(QWidget, Ui_AbstractWidget):
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         table.horizontalHeader().hide()
         table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        table.setMaximumHeight(table.rowHeight(0) * table.model().rowCount() + 2)
+        table.setMaximumHeight(table.rowHeight(0) * table.model().rowCount() + 2 + 16)
         table.verticalHeader().setMinimumWidth(120)
-
-
-
-

@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QVBoxLayout, QFrame, QGroupBox
+from PyQt5.QtWidgets import QVBoxLayout, QFrame, QGroupBox, QSizePolicy
 
 
 class CardWidget(QGroupBox):
@@ -9,3 +9,4 @@ class CardWidget(QGroupBox):
         self.Layout.setContentsMargins(0, 0, 0, 0)
         self.Layout.setSpacing(0)
         self.Layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
+        self.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))

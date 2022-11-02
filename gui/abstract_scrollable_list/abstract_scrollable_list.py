@@ -21,20 +21,13 @@ class AbstractScroller:
         self._sp.setScrollMetric(QScrollerProperties.DragStartDistance, 0.001)
         self._sp.setScrollMetric(QScrollerProperties.MousePressEventDelay, 0.5)
 
-        self._mouse_scroller = QScroller.scroller(self._viewport)
-        self._mouse_scroller.setScrollerProperties(self._sp)
+        self._gesture = QScroller.scroller(self._viewport)
+        self._gesture.setScrollerProperties(self._sp)
 
-        self._touch_scroller = QScroller.scroller(self._viewport)
-        self._touch_scroller.setScrollerProperties(self._sp)
 
-    def setMouseScrollable(self, is_true: bool):
+    def setScrollable(self, is_true: bool, gesture: QScroller.ScrollerGestureType):
         if is_true:
-            self._mouse_scroller.grabGesture(self._viewport, QScroller.LeftMouseButtonGesture)
+            self._gesture.grabGesture(self._viewport, QScroller.LeftMouseButtonGesture)
         else:
-            self._mouse_scroller.ungrabGesture(self._viewport)
+            self._gesture.ungrabGesture(self._viewport)
 
-    def setTouchScrollable(self, is_true: bool):
-        if is_true:
-            self._touch_scroller.grabGesture(self._viewport, QScroller.TouchGesture)
-        else:
-            self._touch_scroller.ungrabGesture(self._viewport)

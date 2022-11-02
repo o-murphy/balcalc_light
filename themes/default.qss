@@ -151,7 +151,7 @@ CardWidget QLabel {
 	background-color: rgb(255, 170, 0);
 	padding: 5px 0px 0px;
 	color: black;
-	max-height: 25px;
+	max-height: 20px;
         font-size: 14px;
 }
 
@@ -166,6 +166,7 @@ CardWidget QTableView {
 
 QTableView {
 	border : 2px solid rgb(78, 78, 78);
+	selection-background-color: transparent;
 }
 
 QTableWidget, QTableView {
@@ -176,7 +177,9 @@ QTableWidget, QTableView {
 
 QTableWidget::item:selected, QTableView::item:selected {
 	background-color: rgb(40, 40, 40);
-
+    border: 0px solid;
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
 }
 
 QTableWidget::item:hover, QTableView::item:hover {
