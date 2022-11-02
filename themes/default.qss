@@ -1,4 +1,4 @@
-QLineEdit {
+SearchBar {
     height: 32px;
 	border: 0px;
 	border-radius: 8px;
@@ -6,6 +6,11 @@ QLineEdit {
 	font-size: 14px;
 	padding: 0px 8px 0px 8px;
 	margin: 0px 10px 0px 10px;
+}
+
+CenteredHeaderLabel {
+    background-color: rgb(255, 170, 0);
+    color: rgb(0, 0, 0);
 }
 
 
@@ -131,3 +136,32 @@ QScrollBar::up-arrow:vertical, QScrollBar::down-arrow:vertical {
 QScrollBar::add-page:vertical, QScrollBar::sub-page:vertical {
     background: none;
 }
+
+CardWidget {
+    padding: 0px 0px 5px;
+    margin: 0px 8px 0px 8px;
+}
+
+CardWidget QLabel {
+	border: 0px solid #FF17365D;
+	border-top-left-radius: 8px;
+	border-top-right-radius: 8px;
+	background-color: rgb(255, 170, 0);
+	padding: 5px 0px 0px;
+	color: black;
+	max-height: 25px;
+        font-size: 14px;
+}
+
+CardWidget QTableView {
+    gridline-color: transparent;
+	border: 1px solid black;
+	border-radius: 8px;
+}
+
+CardWidget QTableView::item {
+    border: 0px solid black;
+	border-radius: 8px;
+	background-color: transparent;
+}
+

@@ -7,6 +7,6 @@ class SearchBar(QLineEdit):
         super(SearchBar, self).__init__(parent)
         self.retranslateUi(self)
 
-    def retranslateUi(self, AbstractWidget):
+    def retranslateUi(self, SearchBar):
         _translate = QCoreApplication.translate
-        AbstractWidget.setPlaceholderText(_translate("SearchBar", "🔍 Search"))
+        SearchBar.setPlaceholderText(_translate("SearchBar", "🔍 Search"))

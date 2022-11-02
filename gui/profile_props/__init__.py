@@ -1,1 +1,1 @@
-from .profiles import ProfileProps
+from .profile_props import ProfileProps
