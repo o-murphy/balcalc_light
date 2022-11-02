@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea
 
 from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
@@ -70,6 +70,15 @@ class ProfileProps(QScrollArea):
         self.cartridge_table = QTableView(self.cartridge_card)
         self.bullet_table = QTableView(self.bullet_card)
 
+        self.rifle_table.setEditTriggers(QTableView.CurrentChanged)
+        self.cartridge_table.setEditTriggers(QTableView.CurrentChanged)
+        self.bullet_table.setEditTriggers(QTableView.CurrentChanged)
+
+        self.rifle_table.setSelectionMode(QTableView.SingleSelection)
+        self.cartridge_table.setSelectionMode(QTableView.SingleSelection)
+        self.bullet_table.setSelectionMode(QTableView.SingleSelection)
+
+
         self.rifle_card.Layout.addWidget(self.rifle_label)
         self.rifle_card.Layout.addWidget(self.rifle_table)
         self.cartridge_card.Layout.addWidget(self.cartridge_label)
@@ -96,5 +105,5 @@ class ProfileProps(QScrollArea):
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         table.horizontalHeader().hide()
         table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        table.setMaximumHeight(table.rowHeight(0) * table.model().rowCount() + 2 + 16)
+        table.setMaximumHeight((table.rowHeight(0) + 1) * table.model().rowCount() + 2 + 16)
         table.verticalHeader().setMinimumWidth(120)
