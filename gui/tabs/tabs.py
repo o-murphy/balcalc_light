@@ -14,10 +14,10 @@ class TabsWidget(FaderTabWidget):
         self.tabBar().setExpanding(True)
 
         self.profiles = ProfilesWidget(self)
-        self.profile_props = ProfileProps(self)
+        # self.profile_props = ProfileProps(self)
         self.settings = SettingsWidget(self)
 
         self.addTab(self.profiles, 'Profiles')
-        self.addTab(self.profile_props, 'Props')
+        # self.addTab(self.profile_props, 'Props')
         self.addTab(self.settings, 'Settings')
 

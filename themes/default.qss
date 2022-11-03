@@ -21,16 +21,33 @@ QTabBar::tab:bottom {
 	height: 40px;
 	background-color:rgb(28, 28, 28);
 	color: rgb(95, 95, 95);
-	border-bottom: 2px solid rgb(28, 28, 28);
+	border-bottom: 0px solid rgb(28, 28, 28);
 }
 
 QTabBar::tab:bottom:selected {
 	color: rgb(255, 170, 0);
-
     border-bottom: 2px solid rgb(255, 170, 0);
 }
 
 QTabBar::tab:bottom:hover:!selected {
+    color: rgb(255, 255, 255);
+}
+
+
+QTabBar::tab:left {
+	width: 40px;
+	background-color:rgb(28, 28, 28);
+	color: rgb(95, 95, 95);
+    border-right: 0px solid rgb(255, 170, 0);
+}
+
+QTabBar::tab:left:selected {
+	color: rgb(255, 170, 0);
+    border-left: 2px solid rgb(255, 170, 0);
+    border-right: 0px solid rgb(255, 170, 0);
+}
+
+QTabBar::tab:left:hover:!selected {
     color: rgb(255, 255, 255);
 }
 

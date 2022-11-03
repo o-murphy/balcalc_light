@@ -1,3 +1,5 @@
+#!C:/Users/Sergey/PycharmProjects/archerbc_lite/venv/Scripts/python.exe
+
 import sys
 import tomllib
 

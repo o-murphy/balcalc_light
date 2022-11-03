@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea, QSizePolicy
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea, QSizePolicy, QGridLayout
 
 from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
@@ -55,7 +55,7 @@ class ProfileProps(QScrollArea):
 
         self.mw = QWidget(self)
 
-        self.mw.Layout = QVBoxLayout(self.mw)
+        self.mw.Layout = QGridLayout(self.mw)
         self.mw.Layout.setContentsMargins(0, 0, 0, 0)
         self.mw.Layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
         self.mw.Layout.setSpacing(0)
@@ -63,16 +63,15 @@ class ProfileProps(QScrollArea):
 
         self.setWidget(self.mw)
 
-
         self.rifle_card = CardWidget(self.mw)
         self.cartridge_card = CardWidget(self.mw)
         self.bullet_card = CardWidget(self.mw)
         self.conditions_card = CardWidget(self.mw)
 
-        self.mw.Layout.addWidget(self.rifle_card, 0)
-        self.mw.Layout.addWidget(self.cartridge_card, 1)
-        self.mw.Layout.addWidget(self.bullet_card, 2)
-        self.mw.Layout.addWidget(self.conditions_card, 3)
+        self.mw.Layout.addWidget(self.rifle_card)
+        self.mw.Layout.addWidget(self.cartridge_card)
+        self.mw.Layout.addWidget(self.bullet_card)
+        self.mw.Layout.addWidget(self.conditions_card)
 
         self.rifle_label = CenteredHeaderLabel('Rifle', self.rifle_card)
         self.cartridge_label = CenteredHeaderLabel('Cartridge', self.cartridge_card)
@@ -124,7 +123,6 @@ class ProfileProps(QScrollArea):
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         table.horizontalHeader().hide()
         table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        # table.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
         table_height = (table.rowHeight(0) + 1) * table.model().rowCount() + 2 + 8
         table.setMaximumHeight(table_height)
         table.setMinimumHeight(table_height)
