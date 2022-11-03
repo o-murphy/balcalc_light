@@ -5,13 +5,15 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScro
 from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
 from ..abstract_scrollable_list import AbstractScroller, QScroller
+from .props_delegates import *
+from py_ballisticcalc.bmath.unit import *
 
 
 TEMP_RIFLE = {
     'Rifle': "UAR-10",
     'Caliber': '.308 Win',
-    'Sight Height': 90,
-    'Twist': 10,
+    'Sight Height': 90.0,
+    'Twist': 10.0,
 }
 
 TEMP_CARTRIDGE = {
@@ -83,10 +85,10 @@ class ProfileProps(QScrollArea):
         self.bullet_table = QTableView(self.bullet_card)
         self.conditions_table = QTableView(self.bullet_card)
 
-        self.rifle_table.setEditTriggers(QTableView.CurrentChanged)
-        self.cartridge_table.setEditTriggers(QTableView.CurrentChanged)
-        self.bullet_table.setEditTriggers(QTableView.CurrentChanged)
-        self.conditions_table.setEditTriggers(QTableView.CurrentChanged)
+        self.rifle_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
+        self.cartridge_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
+        self.bullet_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
+        self.conditions_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
 
         self.rifle_table.setSelectionMode(QTableView.SingleSelection)
         self.cartridge_table.setSelectionMode(QTableView.SingleSelection)
@@ -102,10 +104,14 @@ class ProfileProps(QScrollArea):
         self.conditions_card.Layout.addWidget(self.conditions_label)
         self.conditions_card.Layout.addWidget(self.conditions_table)
 
+        self.rifle_table.setItemDelegateForRow(2, SightHeightDelegate(self.rifle_table))
+        self.rifle_table.setItemDelegateForRow(3, TwistDelegate(self.rifle_table))
+
         self.fill_table(self.rifle_table, TEMP_RIFLE)
         self.fill_table(self.cartridge_table, TEMP_CARTRIDGE)
         self.fill_table(self.bullet_table, TEMP_BULLET)
         self.fill_table(self.conditions_table, TEMP_CONDITIONS)
+
 
     def fill_table(self, table: QTableView, data):
         model = QStandardItemModel(self)
@@ -113,6 +119,7 @@ class ProfileProps(QScrollArea):
         for k, v in data.items():
             item = QStandardItem()
             item.setData(v, Qt.DisplayRole)
+            item.setData(v, Qt.UserRole)
             item.setTextAlignment(Qt.AlignCenter)
             model.appendRow([item])
             labels.append(k)

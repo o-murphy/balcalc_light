@@ -1,3 +1,4 @@
+from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QTabWidget
 from ..profiles import ProfilesWidget
 from ..profile_props import ProfileProps
@@ -20,4 +21,9 @@ class TabsWidget(FaderTabWidget):
         self.addTab(self.profiles, 'Profiles')
         # self.addTab(self.profile_props, 'Props')
         self.addTab(self.settings, 'Settings')
+
+    def keyPressEvent(self, a0: 'QKeyEvent') -> None:
+        super(TabsWidget, self).keyPressEvent(a0)
+        if a0.key() == (Qt.Key_Escape or Qt.Key_Back):
+            self.setCurrentIndex(0)
 
