@@ -1,6 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem
-from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea
+from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScrollArea, QSizePolicy
 
 from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
@@ -30,6 +30,16 @@ TEMP_BULLET = {
     'Drag function data': 0.275
 }
 
+TEMP_CONDITIONS = {
+    'Temp': 15,
+    'PowderTemp': 15,
+    'Pressure': 760,
+    'Humidity': 50,
+    'Latitude': 0,
+    'Angle': 0,
+    'Azimuth': 0,
+}
+
 
 class ProfileProps(QScrollArea):
     def __init__(self, parent=None):
@@ -49,7 +59,7 @@ class ProfileProps(QScrollArea):
         self.mw.Layout.setContentsMargins(0, 0, 0, 0)
         self.mw.Layout.setAlignment(Qt.AlignTop | Qt.AlignHCenter)
         self.mw.Layout.setSpacing(0)
-        self.mw.resize(200, 1000)
+        # self.mw.resize(200, 1000)
 
         self.setWidget(self.mw)
 
@@ -57,27 +67,32 @@ class ProfileProps(QScrollArea):
         self.rifle_card = CardWidget(self.mw)
         self.cartridge_card = CardWidget(self.mw)
         self.bullet_card = CardWidget(self.mw)
+        self.conditions_card = CardWidget(self.mw)
 
         self.mw.Layout.addWidget(self.rifle_card, 0)
         self.mw.Layout.addWidget(self.cartridge_card, 1)
         self.mw.Layout.addWidget(self.bullet_card, 2)
+        self.mw.Layout.addWidget(self.conditions_card, 3)
 
         self.rifle_label = CenteredHeaderLabel('Rifle', self.rifle_card)
         self.cartridge_label = CenteredHeaderLabel('Cartridge', self.cartridge_card)
         self.bullet_label = CenteredHeaderLabel('Bullet', self.bullet_card)
+        self.conditions_label = CenteredHeaderLabel('Conditions', self.bullet_card)
 
         self.rifle_table = QTableView(self.rifle_card)
         self.cartridge_table = QTableView(self.cartridge_card)
         self.bullet_table = QTableView(self.bullet_card)
+        self.conditions_table = QTableView(self.bullet_card)
 
         self.rifle_table.setEditTriggers(QTableView.CurrentChanged)
         self.cartridge_table.setEditTriggers(QTableView.CurrentChanged)
         self.bullet_table.setEditTriggers(QTableView.CurrentChanged)
+        self.conditions_table.setEditTriggers(QTableView.CurrentChanged)
 
         self.rifle_table.setSelectionMode(QTableView.SingleSelection)
         self.cartridge_table.setSelectionMode(QTableView.SingleSelection)
         self.bullet_table.setSelectionMode(QTableView.SingleSelection)
-
+        self.conditions_table.setSelectionMode(QTableView.SingleSelection)
 
         self.rifle_card.Layout.addWidget(self.rifle_label)
         self.rifle_card.Layout.addWidget(self.rifle_table)
@@ -85,17 +100,21 @@ class ProfileProps(QScrollArea):
         self.cartridge_card.Layout.addWidget(self.cartridge_table)
         self.bullet_card.Layout.addWidget(self.bullet_label)
         self.bullet_card.Layout.addWidget(self.bullet_table)
+        self.conditions_card.Layout.addWidget(self.conditions_label)
+        self.conditions_card.Layout.addWidget(self.conditions_table)
 
         self.fill_table(self.rifle_table, TEMP_RIFLE)
         self.fill_table(self.cartridge_table, TEMP_CARTRIDGE)
         self.fill_table(self.bullet_table, TEMP_BULLET)
+        self.fill_table(self.conditions_table, TEMP_CONDITIONS)
 
-    def fill_table(self, table, data):
+    def fill_table(self, table: QTableView, data):
         model = QStandardItemModel(self)
         labels = []
         for k, v in data.items():
             item = QStandardItem()
             item.setData(v, Qt.DisplayRole)
+            item.setTextAlignment(Qt.AlignCenter)
             model.appendRow([item])
             labels.append(k)
 
@@ -105,5 +124,8 @@ class ProfileProps(QScrollArea):
         table.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         table.horizontalHeader().hide()
         table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
-        table.setMaximumHeight((table.rowHeight(0) + 1) * table.model().rowCount() + 2 + 16)
+        # table.setSizePolicy(QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed))
+        table_height = (table.rowHeight(0) + 1) * table.model().rowCount() + 2 + 8
+        table.setMaximumHeight(table_height)
+        table.setMinimumHeight(table_height)
         table.verticalHeader().setMinimumWidth(120)

@@ -8,7 +8,7 @@ class AbstractScroller:
         self._viewport = viewport
 
         self._sp = QScrollerProperties()
-        # # self._sp.setScrollMetric(QScrollerProperties.DragVelocitySmoothingFactor, 0.6)
+        # self._sp.setScrollMetric(QScrollerProperties.DragVelocitySmoothingFactor, 0.6)
         self._sp.setScrollMetric(QScrollerProperties.DragVelocitySmoothingFactor, 0.1)
         self._sp.setScrollMetric(QScrollerProperties.ScrollingCurve, QEasingCurve(QEasingCurve.OutExpo))
         self._sp.setScrollMetric(QScrollerProperties.MinimumVelocity, 0.0)
@@ -23,7 +23,6 @@ class AbstractScroller:
 
         self._gesture = QScroller.scroller(self._viewport)
         self._gesture.setScrollerProperties(self._sp)
-
 
     def setScrollable(self, is_true: bool, gesture: QScroller.ScrollerGestureType):
         if is_true:
