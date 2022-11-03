@@ -6,7 +6,6 @@ from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
 from ..abstract_scrollable_list import AbstractScroller, QScroller
 from .props_delegates import *
-from py_ballisticcalc.bmath.unit import *
 
 
 TEMP_RIFLE = {
@@ -106,6 +105,9 @@ class ProfileProps(QScrollArea):
 
         self.rifle_table.setItemDelegateForRow(2, SightHeightDelegate(self.rifle_table))
         self.rifle_table.setItemDelegateForRow(3, TwistDelegate(self.rifle_table))
+
+        self.cartridge_table.setItemDelegateForRow(1, VelocityDelegate(self.cartridge_table))
+        self.cartridge_table.setItemDelegateForRow(2, TemperatureDelegate(self.cartridge_table))
 
         self.fill_table(self.rifle_table, TEMP_RIFLE)
         self.fill_table(self.cartridge_table, TEMP_CARTRIDGE)

@@ -188,6 +188,7 @@ QTableView {
 
 
 CustomDoubleSpinBox {
+    color: white;
     border : 0px solid rgb(78, 78, 78);
     border-radius: 8px;
     background-color: rgb(55, 52, 63);
