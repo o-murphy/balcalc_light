@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QWidget, QLabel, QGridLayout
 from PyQt5.QtGui import QPixmap
-from PyQt5.QtCore import Qt
-from ..abstract_widget import Ui_AbstractWidget
+from ...abstract_widget import Ui_AbstractWidget
 
 
 class ProfileItemWidget(QWidget, Ui_AbstractWidget):
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, database_id=None):
         super(ProfileItemWidget, self).__init__(parent)
+        self._databse_id = database_id
 
         self.Layout = QGridLayout(self)
 
@@ -28,6 +28,10 @@ class ProfileItemWidget(QWidget, Ui_AbstractWidget):
         self.Layout.setColumnStretch(0, 0)
         self.Layout.setColumnStretch(1, 0)
         self.Layout.setColumnStretch(2, 1)
+
+    @property
+    def database_id(self) -> int:
+        return self._databse_id
 
     @property
     def rifle_name_text(self):

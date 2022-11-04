@@ -5,7 +5,10 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableView, QHeaderView, QScro
 from ..abstract_centered_label import CenteredHeaderLabel
 from ..card_widget import CardWidget
 from ..abstract_scrollable_list import AbstractScroller, QScroller
-from .props_delegates import *
+from .rifle_props import RifleCard
+from .cartridge_props import CartridgeCard
+from .bullet_props import BulletCard
+from .conditions_props import ConditionsCard
 
 
 TEMP_RIFLE = {
@@ -64,55 +67,20 @@ class ProfileProps(QScrollArea):
 
         self.setWidget(self.mw)
 
-        self.rifle_card = CardWidget(self.mw)
-        self.cartridge_card = CardWidget(self.mw)
-        self.bullet_card = CardWidget(self.mw)
-        self.conditions_card = CardWidget(self.mw)
+        self.rifle_card = RifleCard(self.mw)
+        self.cartridge_card = CartridgeCard(self.mw)
+        self.bullet_card = BulletCard(self.mw)
+        self.conditions_card = ConditionsCard(self.mw)
 
         self.mw.Layout.addWidget(self.rifle_card)
         self.mw.Layout.addWidget(self.cartridge_card)
         self.mw.Layout.addWidget(self.bullet_card)
         self.mw.Layout.addWidget(self.conditions_card)
 
-        self.rifle_label = CenteredHeaderLabel('Rifle', self.rifle_card)
-        self.cartridge_label = CenteredHeaderLabel('Cartridge', self.cartridge_card)
-        self.bullet_label = CenteredHeaderLabel('Bullet', self.bullet_card)
-        self.conditions_label = CenteredHeaderLabel('Conditions', self.bullet_card)
-
-        self.rifle_table = QTableView(self.rifle_card)
-        self.cartridge_table = QTableView(self.cartridge_card)
-        self.bullet_table = QTableView(self.bullet_card)
-        self.conditions_table = QTableView(self.bullet_card)
-
-        self.rifle_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
-        self.cartridge_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
-        self.bullet_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
-        self.conditions_table.setEditTriggers(QTableView.SelectedClicked | QTableView.CurrentChanged)
-
-        self.rifle_table.setSelectionMode(QTableView.SingleSelection)
-        self.cartridge_table.setSelectionMode(QTableView.SingleSelection)
-        self.bullet_table.setSelectionMode(QTableView.SingleSelection)
-        self.conditions_table.setSelectionMode(QTableView.SingleSelection)
-
-        self.rifle_card.Layout.addWidget(self.rifle_label)
-        self.rifle_card.Layout.addWidget(self.rifle_table)
-        self.cartridge_card.Layout.addWidget(self.cartridge_label)
-        self.cartridge_card.Layout.addWidget(self.cartridge_table)
-        self.bullet_card.Layout.addWidget(self.bullet_label)
-        self.bullet_card.Layout.addWidget(self.bullet_table)
-        self.conditions_card.Layout.addWidget(self.conditions_label)
-        self.conditions_card.Layout.addWidget(self.conditions_table)
-
-        self.rifle_table.setItemDelegateForRow(2, SightHeightDelegate(self.rifle_table))
-        self.rifle_table.setItemDelegateForRow(3, TwistDelegate(self.rifle_table))
-
-        self.cartridge_table.setItemDelegateForRow(1, VelocityDelegate(self.cartridge_table))
-        self.cartridge_table.setItemDelegateForRow(2, TemperatureDelegate(self.cartridge_table))
-
-        self.fill_table(self.rifle_table, TEMP_RIFLE)
-        self.fill_table(self.cartridge_table, TEMP_CARTRIDGE)
-        self.fill_table(self.bullet_table, TEMP_BULLET)
-        self.fill_table(self.conditions_table, TEMP_CONDITIONS)
+        self.fill_table(self.rifle_card.table, TEMP_RIFLE)
+        self.fill_table(self.cartridge_card.table, TEMP_CARTRIDGE)
+        self.fill_table(self.bullet_card.table, TEMP_BULLET)
+        self.fill_table(self.conditions_card.table, TEMP_CONDITIONS)
 
 
     def fill_table(self, table: QTableView, data):

@@ -22,7 +22,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.orientation = Orientation.vertical
         self.setupUi(self)
 
-        self.tabs.profiles.plist.currentItemChanged.connect(self.open_props)
+        self.tabs.profiles.plist.itemClicked.connect(self.open_props)
         self.props.hide()
 
     def open_props(self, item):
